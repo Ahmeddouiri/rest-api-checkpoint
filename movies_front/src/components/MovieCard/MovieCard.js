@@ -10,7 +10,7 @@ const navigate = useNavigate()
 
   return (
     <>
-      <Card style={{ width: "18rem" }}>
+      <Card className="card d-flex flex-column">
       <Card.Title>{Title}</Card.Title>
 
           <Card.Img variant="top" style={{width:"auto"}} src={posterURL} />

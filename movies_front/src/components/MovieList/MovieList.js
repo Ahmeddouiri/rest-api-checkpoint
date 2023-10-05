@@ -5,7 +5,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Card from "react-bootstrap/Card";
-import { Button } from 'react-bootstrap';
+import { Button, CardGroup } from 'react-bootstrap';
 import axios from 'axios';
 
 function MovieList() {
@@ -210,6 +210,7 @@ function MovieList() {
       <Container>
         {loading && <div>Loading</div>}
         {!loading && (
+          <CardGroup>
           <Card.Body>
             <Card.Title className="mb-3 " ><h2>Liste Of Movies</h2></Card.Title>
             <Row md={4}>
@@ -218,15 +219,17 @@ function MovieList() {
                   .toLowerCase())).map((movie, key) => (
                     (editid === movie._id ?
 
-                      <Card.Body>
+                      <Card.Body className="card flex">
+                        <Form.Group className="mb-3">
                         <Card.Title>edite movie : {movie.Title} Movie</Card.Title>
                         <Form.Control value={inputTile2} onChange={(e) => { setInputTitle2(e.target.value) }} placeholder="Title" />
                         <Form.Control value={inputYear2} onChange={(e) => { setInputYear2(e.target.value) }} placeholder="Year " />
                         <Form.Control value={inputrate2} onChange={(e) => { setInputrate2(e.target.value) }} placeholder="rate" />
                         <Form.Control value={inputdescription2} onChange={(e) => { setInputdescription2(e.target.value) }} placeholder="description" />
                         <Form.Control value={inputposterURL2} onChange={(e) => { setInputposterURL2(e.target.value) }} placeholder="posterURL" />
-                        <Button onClick={() => UpdateMovie()} >save</Button><span>  </span> 
-                        <Button onClick={() => {setEditid(null)}} >Cancel</Button>
+                        <Button style={{ height: "20",width:"50" }} onClick={() => UpdateMovie()} >save</Button><span>  </span> 
+                        <Button style={{ height: "20",width:"50" }} onClick={() => {setEditid(null)}} >Cancel</Button>
+                        </Form.Group>
                       </Card.Body> :
                       <Row style={{ height: "auto" }} >
 
@@ -243,9 +246,9 @@ function MovieList() {
                             id={movie.id}
                           />
                         </Row>
-
-                        <button type="button" class="btn btn-outline-danger" style={{ height: "auto" }} onClick={() => { DeleteMovie(movie._id) }} >Delete</button>
-                        <button type="button" class="btn btn-outline-info"
+                        <Row>
+                        <button type="button" class="btn btn-outline-danger" style={{ height: "20",width:"50" }} onClick={() => { DeleteMovie(movie._id) }} >Delete</button>
+                        <button type="button" class="btn btn-outline-info"  style={{ height: "20",width:"50" }}
                           onClick={() => {
                             setEditid(movie._id)
                             setInputTitle2(movie.Title);
@@ -256,14 +259,16 @@ function MovieList() {
 
                           }}
                         >Edite</button>
-
+                        </Row>
                       </Row>
                     )
                   ))}
 
 
             </Row>
-          </Card.Body>)}
+          </Card.Body>
+          </CardGroup>
+          )}
       </Container>
 
     </>
